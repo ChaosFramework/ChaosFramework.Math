@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <ProjectStyle>SDK</ProjectStyle>
+    <ChaosAnalyzers_CleanCode_Analyzer_TF>netstandard2.0</ChaosAnalyzers_CleanCode_Analyzer_TF>
   </PropertyGroup>
 
   <Import Project="ChaosFramework.Math.props" />
@@ -17,6 +18,7 @@
   <!-- References -->
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="3.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.6" />
   </ItemGroup>
 
 </Project>

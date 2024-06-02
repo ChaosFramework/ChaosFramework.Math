@@ -7,9 +7,11 @@
 
   <PropertyGroup>
     <ProjectStyle>VS</ProjectStyle>
+    <ChaosAnalyzers_CleanCode_Analyzer_TF>net4.5</ChaosAnalyzers_CleanCode_Analyzer_TF>
   </PropertyGroup>
 
-  <Import Project="Directory.Build.props" />
+  <Import Project="submodules/ChaosPresets.Targets/Frameworks/net4.5.2.targets" />
+  <Import Project="submodules/ChaosPresets.Targets/Paths/Output/bin.targets" />
   <Import Project="ChaosFramework.Math.props" />
 
   <!-- Included Files -->
@@ -23,11 +25,18 @@
 
   <!-- References -->
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+
     <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+
+  <!-- Cleanup Tasks -->
+  <Import Project="submodules/ChaosPresets.References/BuildTasks/ChaosBuild.ProjectAnalyzer.targets" />
+  <Import Project="submodules/ChaosPresets.References/BuildTasks/ChaosBuild.CodeFormatter.Tasks.ChangedProjectFiles.targets" />
 
   <!-- Default Targets for Building CSharp Projects -->
   <Import Project="$(MSBuildToolsPath)/Microsoft.CSharp.targets" />
