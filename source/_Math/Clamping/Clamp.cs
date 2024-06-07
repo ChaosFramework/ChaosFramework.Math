@@ -8,61 +8,15 @@ namespace ChaosFramework.Math
         /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
         /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
         /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static byte Clamp(byte min, byte max, byte value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static short Clamp(short min, short max, short value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static ushort Clamp(ushort min, ushort max, ushort value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static int Clamp(int min, int max, int value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static uint Clamp(uint min, uint max, uint value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static long Clamp(long min, long max, long value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static ulong Clamp(ulong min, ulong max, ulong value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static float Clamp(float min, float max, float value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static double Clamp(double min, double max, double value) => value < min ? min : value > max ? max : value;
-
-        /// <summary> Clamps a value between a given minimum and maximum. </summary>
-        /// <param name="min"> Will be returned if <paramref name="value"/> is less than <paramref name="min"/>. </param>
-        /// <param name="max"> Will be returned if <paramref name="value"/> is greater than <paramref name="max"/>. </param>
-        /// <param name="value"> The value to be clamped between <paramref name="min"/> and <paramref name="max"/>. </param>
-        public static decimal Clamp(decimal min, decimal max, decimal value) => value < min ? min : value > max ? max : value;
+        [ChaosGenerators.TemplateGenerator(
+            "=> value < min ? min : value > max ? max : value;",
+            typeof(sbyte), typeof(byte),
+            typeof(short), typeof(ushort),
+            typeof(int), typeof(uint),
+            typeof(long), typeof(ulong),
+            typeof(float), typeof(double), typeof(decimal)
+            )]
+        public delegate T _Clamp<T>(T min, T max, T value);
 
         /// <summary>
         ///     Clamps all components of the given <see cref="Vector2f"/> between <paramref name="min"/> and <paramref name="max"/>.
