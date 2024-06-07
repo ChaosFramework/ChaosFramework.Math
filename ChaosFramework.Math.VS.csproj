@@ -8,6 +8,10 @@
   <PropertyGroup>
     <ProjectStyle>VS</ProjectStyle>
     <ChaosAnalyzers_CleanCode_Analyzer_TF>net4.5</ChaosAnalyzers_CleanCode_Analyzer_TF>
+    <ChaosUtil_Primitives_Analyzer_TF>net4.5</ChaosUtil_Primitives_Analyzer_TF>
+    <ChaosGenerators_Analyzer_TF>net4.5</ChaosGenerators_Analyzer_TF>
+    <ChaosGenerators_Types_Analyzer_TF>net4.5</ChaosGenerators_Types_Analyzer_TF>
+    <ChaosGenerators_Types_Ref_TF>net4.5</ChaosGenerators_Types_Ref_TF>
   </PropertyGroup>
 
   <Import Project="submodules/ChaosPresets.Targets/Frameworks/net4.5.2.targets" />
@@ -17,6 +21,7 @@
   <!-- Included Files -->
   <ItemGroup>
     <Compile Include="source\**\*.cs" />
+    <Compile Include="generated\**\*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="License\**\*.txt" />
     <None Include="OpenTK.dll.config" />
@@ -24,6 +29,8 @@
   </ItemGroup>
 
   <!-- References -->
+  <Import Project="submodules/ChaosPresets.References/References/ChaosGenerators.Types.targets" />
+  <Import Project="submodules/ChaosPresets.References/Analyzers.Dll/ChaosGenerators.Types.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
