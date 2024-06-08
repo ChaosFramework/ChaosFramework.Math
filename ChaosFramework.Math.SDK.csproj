@@ -4,6 +4,9 @@
   <PropertyGroup>
     <ProjectStyle>SDK</ProjectStyle>
     <ChaosAnalyzers_CleanCode_Analyzer_TF>netstandard2.0</ChaosAnalyzers_CleanCode_Analyzer_TF>
+    <ChaosUtil_Primitives_Analyzer_TF>netstandard2.0</ChaosUtil_Primitives_Analyzer_TF>
+    <ChaosGenerators_Analyzer_TF>netstandard2.0</ChaosGenerators_Analyzer_TF>
+    <ChaosGenerators_Types_Analyzer_TF>netstandard2.0</ChaosGenerators_Types_Analyzer_TF>
   </PropertyGroup>
 
   <Import Project="ChaosFramework.Math.props" />
@@ -16,6 +19,9 @@
   </ItemGroup>
 
   <!-- References -->
+  <Import Project="submodules/ChaosPresets.References/Analyzers.Dll/ChaosUtil.Primitives.targets" />
+  <Import Project="submodules/ChaosPresets.References/Analyzers.Dll/ChaosGenerators.Types.targets" />
+  <Import Project="submodules/ChaosPresets.References/Analyzers.Dll/ChaosGenerators.targets" />
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="3.0.1" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.6" />
