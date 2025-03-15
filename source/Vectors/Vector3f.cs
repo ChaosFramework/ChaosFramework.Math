@@ -45,9 +45,12 @@ namespace ChaosFramework.Math.Vectors
         }
 
         public static bool TryParse(string str, out Vector3f v)
+            => TryParse(str, Constants.VECTOR_COMPONENT_SEPARATOR, out v);
+
+        public static bool TryParse(string str, char[] splitCharacters, out Vector3f v)
         {
             v = EMPTY;
-            string[] values = str.Split(new char[] { ',' });
+            string[] values = str.Split(splitCharacters);
             if (values.Length == 1)
             {
                 if (Parse.TryParse(values[0], out v.x))

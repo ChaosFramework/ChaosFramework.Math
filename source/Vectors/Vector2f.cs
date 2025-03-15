@@ -43,10 +43,13 @@ namespace ChaosFramework.Math.Vectors
             writer.WriteAs(value.y);
         }
 
-        static bool TryParse(string str, out Vector2f v)
+        public static bool TryParse(string str, out Vector2f v)
+            => TryParse(str, Constants.VECTOR_COMPONENT_SEPARATOR, out v);
+
+        public static bool TryParse(string str, char[] splitCharacters, out Vector2f v)
         {
             v = EMPTY;
-            string[] values = str.Split(new char[] { ',' });
+            string[] values = str.Split(splitCharacters);
             if (values.Length == 1)
             {
                 if (Parse.TryParse(values[0], out v.x))
