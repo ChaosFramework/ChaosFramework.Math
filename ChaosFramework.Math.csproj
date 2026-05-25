@@ -1,58 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import
-    Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
-    Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"
-    />
+<Project Sdk="Microsoft.NET.Sdk">
 
   <!-- Project Metadata -->
   <PropertyGroup>
     <AssemblyName>ChaosFramework.Math</AssemblyName>
     <RootNamespace>ChaosFramework.Math</RootNamespace>
     <ProjectGuid>{EAB5FF3F-956D-4B25-A284-B847616A2B00}</ProjectGuid>
-  </PropertyGroup>
-
-  <!-- Properties -->
-  <Import Project="submodules/ChaosPresets.Targets/Properties/Library.targets" />
-  <Import Project="submodules/ChaosPresets.Targets/Paths/Output/bin.targets" />
-  <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <!-- Configuration and Platform -->
-  <Import Project="submodules/ChaosPresets.Targets/Configurations.targets" />
-  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' " />
+  <!-- Properties -->
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.Targets/Properties/Common.targets" />
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.Targets/Properties/OutputType/Library.targets" />
+
+  <!-- Configurations -->
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.Targets/Configurations.targets" />
 
   <!-- Included Files -->
   <ItemGroup>
-    <Compile Include="source\**\*.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="License\**\*.txt" />
+    <Compile Include="source/**/*.cs" />
+    <None Include="License/**/*.txt" />
     <None Include="OpenTK.dll.config" />
-    <None Include="packages.config" />
   </ItemGroup>
 
   <!-- References -->
-  <Import Project="submodules/ChaosPresets.References/ProjectReferences/ChaosUtil.Primitives.targets" />
-  <Import Project="submodules/ChaosPresets.References/ProjectReferences/ChaosUtil.Serialization.targets" />
-  <Import Project="submodules/ChaosPresets.References/ProjectReferences/ChaosFramework.Collections.targets" />
-  <Import Project="submodules/ChaosPresets.References/ProjectReferences/ChaosFramework.IO.targets" />
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.References/ProjectReferences/ChaosUtil.Primitives.targets" />
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.References/ProjectReferences/ChaosUtil.Serialization.targets" />
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.References/ProjectReferences/ChaosFramework.Collections.targets" />
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.References/ProjectReferences/ChaosFramework.IO.targets" />
 
-    <Reference Include="OpenTK, Version=3.0.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\OpenTK.3.0.1\lib\net20\OpenTK.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+  <ItemGroup>
+    <PackageReference Include="OpenTK" Version="3.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.6" />
   </ItemGroup>
 
   <!-- Analyzers -->
-  <Import Project="submodules/ChaosPresets.References/Analyzers/ChaosAnalyzers.CleanCode.targets" />
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.References/Analyzers/ChaosAnalyzers.CleanCode.targets" />
 
-  <!-- Cleanup Task -->
-  <Import Project="submodules/ChaosPresets.References/BuildTasks/ChaosBuild.CodeFormatter.Tasks.ChangedProjectFiles.targets" />
+  <!-- Build Tasks -->
+  <Import Project="$(SolutionDir)submodules/ChaosPresets.References/BuildTasks/ChaosBuild.CodeFormatter.Tasks.ChangedProjectFiles.targets" />
 
-  <!-- Default Targets for Building CSharp Projects -->
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
