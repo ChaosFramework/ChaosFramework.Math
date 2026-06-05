@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static ChaosFramework.Math.Exponentials;
 using static ChaosFramework.Math.Signs;
-using TK_Vec3 = OpenTK.Vector3;
+using TK_Vec3 = OpenTK.Mathematics.Vector3;
 
 namespace ChaosFramework.Math.Vectors
 {

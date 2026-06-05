@@ -3,7 +3,7 @@ using ChaosFramework.Math.Vectors;
 using System.Diagnostics;
 using static ChaosFramework.Math.Exponentials;
 using static ChaosFramework.Math.Trigonometry;
-using TK_Quat = OpenTK.Quaternion;
+using TK_Quat = OpenTK.Mathematics.Quaternion;
 
 namespace ChaosFramework.Math
 {
@@ -28,7 +28,7 @@ namespace ChaosFramework.Math
             writer.Write(v.y);
             writer.Write(v.z);
         }
-        
+
         public static Quaternion Normalize(Quaternion q) { q.Normalize(); return q; }
 
         public static Quaternion Invert(Quaternion q) { q.Invert(); return q; }

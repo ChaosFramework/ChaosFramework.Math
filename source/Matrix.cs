@@ -3,7 +3,7 @@ using ChaosFramework.Math.Vectors;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static ChaosFramework.Math.Trigonometry;
-using TK_Mat = OpenTK.Matrix4;
+using TK_Mat = OpenTK.Mathematics.Matrix4;
 
 namespace ChaosFramework.Math
 {
