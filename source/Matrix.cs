@@ -1,9 +1,10 @@
 using ChaosFramework.IO;
 using ChaosFramework.Math.Vectors;
 using System.Diagnostics;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using static ChaosFramework.Math.Trigonometry;
-using TK_Mat = OpenTK.Mathematics.Matrix4;
 
 namespace ChaosFramework.Math
 {
@@ -141,13 +142,27 @@ namespace ChaosFramework.Math
              + m01 * (m12 * m20 - m10 * m22)
              + m02 * (m10 * m21 - m11 * m20);
 
-        public static Matrix Invert(Matrix m) => m.determinant == 0 ? NAN : (Matrix)TK_Mat.Invert(m);
-        public static Matrix Transpose(Matrix m) => TK_Mat.Transpose(m);
-        public static Matrix RotationX(float angle) => TK_Mat.CreateRotationX(angle);
-        public static Matrix RotationY(float angle) => TK_Mat.CreateRotationY(angle);
-        public static Matrix RotationZ(float angle) => TK_Mat.CreateRotationZ(angle);
-        public static Matrix RotationAxis(Vector3f axis, float angle) => TK_Mat.CreateFromAxisAngle(axis, angle);
-        public static Matrix RotationQuaternion(Quaternion q) => TK_Mat.CreateFromQuaternion(q);
+        public static Matrix Invert(Matrix m)
+            => Matrix4x4.Invert(Unsafe.As<Matrix, Matrix4x4>(ref m), out Matrix4x4 result)
+                ? Unsafe.As<Matrix4x4, Matrix>(ref result)
+                : NAN;
+
+        public static Matrix Transpose(Matrix m)
+            => Unsafe.As<Matrix4x4, Matrix>(ref Unsafe.AsRef(Matrix4x4.Transpose(Unsafe.As<Matrix, Matrix4x4>(ref m))));
+
+        public static Matrix RotationX(float angle) => Unsafe.As<Matrix4x4, Matrix>(ref Unsafe.AsRef(Matrix4x4.CreateRotationX(angle)));
+        public static Matrix RotationY(float angle) => Unsafe.As<Matrix4x4, Matrix>(ref Unsafe.AsRef(Matrix4x4.CreateRotationY(angle)));
+        public static Matrix RotationZ(float angle) => Unsafe.As<Matrix4x4, Matrix>(ref Unsafe.AsRef(Matrix4x4.CreateRotationZ(angle)));
+        public static Matrix RotationAxis(Vector3f axis, float angle)
+            => Unsafe.As<Matrix4x4, Matrix>(
+                ref Unsafe.AsRef(Matrix4x4.CreateFromAxisAngle(Unsafe.As<Vector3f, Vector3>(ref axis), angle))
+                );
+
+        public static Matrix RotationQuaternion(Quaternion q)
+            => Unsafe.As<Matrix4x4, Matrix>(
+                ref Unsafe.AsRef(Matrix4x4.CreateFromQuaternion(Unsafe.As<Quaternion, System.Numerics.Quaternion>(ref q)))
+                );
+
         public static Matrix RotationYawPitchRoll(float yaw, float pitch, float roll)
             => RotationZ(roll) * RotationX(pitch) * RotationY(yaw);
 
@@ -287,12 +302,6 @@ namespace ChaosFramework.Math
         public override bool Equals(object other) => other is Matrix && Equals((Matrix)other);
         public bool Equals(Matrix other) => this == other;
         public override int GetHashCode() { float det = determinant; return *(int*)&det; }
-
-        public static implicit operator TK_Mat(Matrix m)
-            => new TK_Mat { Row0 = m.row0, Row1 = m.row1, Row2 = m.row2, Row3 = m.row3 };
-
-        public static implicit operator Matrix(TK_Mat m)
-            => new Matrix(m.Row0, m.Row1, m.Row2, m.Row3);
 
         public static implicit operator Matrix(float f) => Scaling(f);
     }

@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static ChaosFramework.Math.Exponentials;
 using static ChaosFramework.Math.Signs;
-using TK_Vec2 = OpenTK.Mathematics.Vector2;
 
 namespace ChaosFramework.Math.Vectors
 {
@@ -182,8 +181,6 @@ namespace ChaosFramework.Math.Vectors
         public static bool operator ==(Vector2f a, Vector2f b) => a.x == b.x && a.y == b.y;
         public static bool operator !=(Vector2f a, Vector2f b) => a.x != b.x || a.y != b.y;
 
-        public static implicit operator TK_Vec2(Vector2f v) => *(TK_Vec2*)&v;
-        public static implicit operator Vector2f(TK_Vec2 v) => *(Vector2f*)&v;
         public static implicit operator Vector2f(float f) { return new Vector2f(f, f); }
 
         public override bool Equals(object other) => other is Vector2f && Equals((Vector2f)other);
