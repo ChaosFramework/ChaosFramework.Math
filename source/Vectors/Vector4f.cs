@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using static ChaosFramework.Math.Exponentials;
 using static ChaosFramework.Math.Signs;
-using TK_Vec4 = OpenTK.Vector4;
 
 namespace ChaosFramework.Math.Vectors
 {
@@ -224,8 +223,6 @@ namespace ChaosFramework.Math.Vectors
         public bool Equals(Vector4f other) => this == other;
         public override int GetHashCode() => (int)(x + y + z + w);
 
-        public static implicit operator TK_Vec4(Vector4f v) => *(TK_Vec4*)&v;
-        public static implicit operator Vector4f(TK_Vec4 v) => *(Vector4f*)&v;
         public static implicit operator Vector4f(float f) => new Vector4f(f, f, f, f);
 
         public float Dot(Vector4f other) => Dot(this, other);

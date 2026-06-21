@@ -3,7 +3,6 @@ using ChaosFramework.Math.Vectors;
 using System.Diagnostics;
 using static ChaosFramework.Math.Exponentials;
 using static ChaosFramework.Math.Trigonometry;
-using TK_Quat = OpenTK.Quaternion;
 
 namespace ChaosFramework.Math
 {
@@ -28,7 +27,7 @@ namespace ChaosFramework.Math
             writer.Write(v.y);
             writer.Write(v.z);
         }
-        
+
         public static Quaternion Normalize(Quaternion q) { q.Normalize(); return q; }
 
         public static Quaternion Invert(Quaternion q) { q.Invert(); return q; }
@@ -170,9 +169,6 @@ namespace ChaosFramework.Math
 
         public static Quaternion operator *(Quaternion quaternion, float scale)
             => new Quaternion(quaternion.xyz * scale, quaternion.w * scale);
-
-        public static implicit operator TK_Quat(Quaternion q) => new TK_Quat(q.x, q.y, q.z, q.w);
-        public static implicit operator Quaternion(TK_Quat q) => new Quaternion(q.X, q.Y, q.Z, q.W);
 
         public override bool Equals(object obj) => obj is Quaternion ? Equals((Quaternion)obj) : false;
         public bool Equals(Quaternion compare) => this == compare;
