@@ -257,6 +257,25 @@ namespace ChaosFramework.Math
             return v0;
         }
 
+        /// <summary> Returns a new <see cref="Vector2ui"/> consisting of the componentwise maximum of both given vectors. </summary>
+        /// <param name="a"> First value to be compared. </param>
+        /// <param name="b"> Second value to be compared. </param>
+        public static Vector2ui Max(Vector2ui a, Vector2ui b)
+            => new Vector2ui(Max(a.x, b.x), Max(a.y, b.y));
+
+        /// <summary> Returns a new <see cref="Vector2i"/> consisting of the componentwise maximum of all given vectors. </summary>
+        /// <param name="v0"> First value to be compared. </param>
+        /// <param name="v"> Further values to be compared. </param>
+        public static Vector2ui Max(Vector2ui v0, params Vector2ui[] v)
+        {
+            foreach (Vector2ui a in v)
+            {
+                v0.x = Max(v0.x, a.x);
+                v0.y = Max(v0.y, a.y);
+            }
+            return v0;
+        }
+
         /// <summary> Returns a new <see cref="Vector3i"/> consisting of the componentwise maximum of both given vectors. </summary>
         /// <param name="a"> First value to be compared. </param>
         /// <param name="b"> Second value to be compared. </param>
