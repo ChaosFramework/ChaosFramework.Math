@@ -66,15 +66,7 @@ namespace ChaosFramework.Math
         }
 
         public void Expand(Self other)
-        {
-#if DEBUG
-            if (other.IsNegative())
-                // TODO: Reconsider life choices!
-                throw new System.InvalidOperationException();
-#endif
-
-            Expand(other.low, other.high);
-        }
+            => Expand(other.low, other.high);
 
         public void Expand(params Self[] others)
         {
